@@ -168,16 +168,16 @@ EMAIL_HOST_USER = get_env_values('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = get_env_values('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 
-# CELERY_BROKER_URL = 'redis://redis:6379/0'
-# CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+# CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 
 CELERY_BEAT_SCHEDULE = {
     'birthday_mail': {
         'task': 'users.tasks.check_birthday',
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(days=1)
     },
 }
 
