@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
+    'corsheaders',
 
     'users.apps.UsersConfig',
     'modules.apps.ModulesConfig',
@@ -94,12 +96,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'educational_module',
-        # 'NAME': 'postgres',
+        'NAME': get_env_values('db_name'),
         'USER': 'postgres',
         'PASSWORD': get_env_values('db_password'),
-        # 'HOST': 'db',
-        'HOST': '127.0.0.1'
+        'HOST': get_env_values('db_host')
     }
 }
 
@@ -161,3 +161,28 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = get_env_values('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = get_env_values('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True
+
+# CELERY_BROKER_URL = 'redis://redis:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'birthday_mail': {
+        'task': 'users.tasks.check_birthday',
+        'schedule': timedelta(minutes=1)
+    },
+}
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',  # Замените на адрес вашего фронтенд-сервера
+]
+
+CORS_ALLOW_ALL_ORIGINS = False

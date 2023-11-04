@@ -27,7 +27,9 @@ class UserSerializerTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.ru',
-            password='test'
+            password='test',
+            first_name='Test',
+            last_name='Testov'
         )
 
         self.serializer = UserSerializer(instance=self.user)
@@ -44,14 +46,14 @@ class UserCreateSerializerTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.ru',
-            password='test'
+            password='test',
         )
 
         self.serializer = UserCreateSerializer(instance=self.user)
 
     def test_contains_expected_fields(self):
         data = self.serializer.data
-        self.assertEqual(set(data.keys()), set(['email', 'password']))
+        self.assertEqual(set(data.keys()), set(['email', 'password', 'first_name', 'last_name', 'phone', 'birth_date']))
 
 
 class UserTestCase(APITestCase):
@@ -69,7 +71,9 @@ class UserTestCase(APITestCase):
 
         self.data = {
             'email': 'test@example.com',
-            'password': 'test'
+            'password': 'test',
+            'first_name': 'Test',
+            'last_name': 'Testov'
         }
 
     def test_create_user(self):
@@ -82,7 +86,12 @@ class UserTestCase(APITestCase):
             response.json(),
             {
                 'email': 'test@example.com',
-                'password': 'test'
+                'password': 'test',
+                'first_name': 'Test',
+                'last_name': 'Testov',
+                'phone': None,
+                'birth_date': None
+
             }
         )
 
@@ -113,8 +122,8 @@ class UserTestCase(APITestCase):
             response.json(),
             {
                 'email': 'test@example.com',
-                'first_name': '',
-                'last_name': '',
+                'first_name': 'Test',
+                'last_name': 'Testov',
                 'phone': None,
                 'birth_date': None,
                 'qty_modules': 0,
@@ -124,14 +133,14 @@ class UserTestCase(APITestCase):
     def test_update_user(self):
         self.test_create_user()
         pk = User.objects.all().latest('pk').pk
-        response = self.client.patch(f'/users/user/{pk}/', {'first_name': 'Test'})
+        response = self.client.patch(f'/users/user/{pk}/', {'first_name': 'Test1'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             response.json(),
             {
                 'email': 'test@example.com',
-                'first_name': 'Test',
-                'last_name': '',
+                'first_name': 'Test1',
+                'last_name': 'Testov',
                 'phone': None,
                 'birth_date': None,
                 'qty_modules': 0,

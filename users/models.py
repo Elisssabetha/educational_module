@@ -50,7 +50,6 @@ class User(AbstractUser):
     phone = models.CharField(max_length=35, **NULLABLE, verbose_name='Номер телефона')
     birth_date = models.DateField(**NULLABLE, verbose_name='Дата рождения')
 
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
