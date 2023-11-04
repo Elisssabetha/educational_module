@@ -4,7 +4,7 @@ from modules.views import ModulesCreateAPIView, ModulesListAPIView, ModulesRetri
     ModulesDestroyAPIView
 
 urlpatterns = [
-    path('modules/create', ModulesCreateAPIView.as_view(), name='module_create'),
+    path('modules/create/', ModulesCreateAPIView.as_view(), name='module_create'),
     path('modules/', ModulesListAPIView.as_view(), name='modules'),
     path('modules/<int:pk>/', ModulesRetrieveAPIView.as_view(), name='module'),
     path('modules/update/<int:pk>/', ModulesUpdateAPIView.as_view(), name='module_update'),
