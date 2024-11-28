@@ -1,0 +1,357 @@
+// Кнопка фильтрации + форма
+.filter-wrapper {
+    position: relative;
+}
+
+// форма
+.filter {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    padding: 40px 48px;
+    box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.32);
+    background: rgb(255, 255, 255);
+    z-index: 1;
+    width: 542px;
+    // height: 540px;
+    display: none;
+    // display: flex;
+    flex-direction: column;
+    row-gap: 36px;
+
+    // Кнопка применить
+    &__btn {
+        border: 1px solid rgb(4, 4, 4);
+        border-radius: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: transparent;
+        width: 190px;
+        color: rgb(0, 0, 0);
+        font: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 125%;
+        text-align: center;
+        align-self: flex-end;
+        transition: all 0.7s;
+    }
+
+    &__btn:hover {
+        background: $main-color;
+        color: $color-text;
+    }
+
+    // блок со всеми фильтрами
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        row-gap: 32px;
+        column-gap: 65px;
+        height: 445.5px;
+    }
+
+    &__fieldset {
+        position: relative;
+        border: none;
+        width: 190px;
+    }
+
+    &__legend {
+        color: rgb(5, 5, 5);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 125%;
+        text-align: left;
+        margin-bottom: 14px;
+    }
+
+    // Радиокнопки "Срок доставки"
+
+    &__dt-box {
+        display: flex;
+        flex-direction: column;
+        row-gap: 14px;
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        color: $main-color;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 121%;
+        text-align: left;
+    }
+
+    &__radio-label::before {
+        content: '';
+        border: 1px solid $main-color;
+        border-radius: 60px;
+        width: 15px;
+        height: 15px;
+        left: 0;
+        top: 1px;
+        position: absolute;
+
+    }
+
+    &__radio-input:checked+.filter__radio-label::after {
+        content: '';
+        position: absolute;
+        // border: 1px solid $main-color;
+        background: url(images/mark.svg) no-repeat center;
+        background-size: contain;
+        width: 8px;
+        height: 8px;
+        left: 4px;
+        top: 5px;
+    }
+
+    // Ползунок цены
+
+    &__range {
+        position: relative;
+        margin-bottom: 32px;
+    }
+
+    &__range-lable {
+        color: rgb(0, 0, 0);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 121%;
+        text-align: left;
+    }
+
+    &__range-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        outline: none;
+        width: 100%;
+        height: 10px;
+    }
+
+    &__range-input,
+    .filter__range-input::-webkit-slider-runnable-track,
+    .filter__range-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        // background: none;
+    }
+
+    &__range-input::-webkit-slider-runnable-track {
+        background: $main-color;
+        width: 190px;
+        height: 0px;
+        border: 1px solid $main-color;
+
+    }
+
+    &__range-input::-webkit-slider-thumb {
+        position: relative;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+        margin-left: 1px;
+        background: $main-color;
+        border: 1px solid $main-color;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    &__range-input:nth-child(2)::-webkit-slider-thumb {
+        margin-left: -1px;
+    }
+
+
+    &__range-input::-webkit-slider-thumb:active {
+        cursor: grabbing;
+    }
+
+    &__range-input {
+        position: absolute;
+        left: 0.39px;
+        top: 35.5px;
+    }
+
+
+    // Цвета
+
+    &__color-box {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    &__color {
+        width: 14px;
+        height: 14px;
+    }
+
+    &__checkbox-input {
+        display: none;
+    }
+
+    &__checkbox-label {
+        position: relative;
+        cursor: pointer;
+    }
+
+    &__checkbox-label::before {
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        left: 0;
+        border: 1px solid #ccc;
+        position: absolute;
+    }
+
+    &__color--white::before {
+        border: 1px solid rgb(136, 136, 136);
+        background: rgb(255, 255, 255);
+
+    }
+
+    &__color--black::before {
+        border: 1px solid rgb(0, 0, 0);
+        background: rgb(0, 0, 0);
+    }
+
+    &__color--grey::before {
+        background: rgb(115, 115, 115);
+        border-color: rgb(115, 115, 115);
+    }
+
+    &__color--red::before {
+        background: rgb(255, 0, 0);
+        border-color: rgb(255, 0, 0);
+    }
+
+    &__color--orange::before {
+        background: rgb(255, 122, 65);
+        border-color: rgb(255, 122, 65);
+    }
+
+    &__color--yellow::before {
+        background: rgb(242, 203, 1);
+        border-color: rgb(242, 203, 1);
+    }
+
+    &__color--green::before {
+        background: rgb(0, 191, 42);
+        border-color: rgb(0, 191, 42);
+    }
+
+    &__color--lightgreen::before {
+        background: rgb(28, 204, 151);
+        border-color: rgb(28, 204, 151);
+    }
+
+    &__color--lightblue::before {
+        background: rgb(0, 159, 227);
+        border-color: rgb(0, 159, 227);
+    }
+
+    &__color--blue::before {
+        background: rgb(0, 10, 248);
+        border-color: rgb(0, 10, 248);
+    }
+
+    &__color--violet::before {
+        background: rgb(103, 16, 214);
+        border-color: rgb(103, 16, 214);
+    }
+
+    &__color--purple::before {
+        background: rgb(157, 13, 181);
+        border-color: rgb(157, 13, 181);
+    }
+
+    &__color--lilac::before {
+        background: rgb(216, 154, 255);
+        border-color: rgb(216, 154, 255);
+    }
+
+    &__color--pink::before {
+        background: rgb(255, 101, 166);
+        border-color: rgb(255, 101, 166);
+    }
+
+    &__checkbox-input:checked+ .filter__color--white::before {
+        border: none;
+    }
+
+    &__checkbox-input:checked+.filter__checkbox-label::after {
+        content: '';
+        background: url(images/mark.svg) no-repeat center;
+        border: 1px solid $main-color;
+        filter: drop-shadow(0px 0px 1px #ccc);
+        background-size: 10px 10px;
+        width: 14.8px;
+        height: 14.8px;
+        left: 0;
+        top: -1px;
+        position: absolute;
+    }
+
+    &__checkbox-input:checked+.filter__color--black::after,
+    &__checkbox-input:checked+.filter__color--blue::after {
+        content: '';
+        filter: invert(100%)
+    }
+
+    // Тип комнаты
+
+    &__room-box {
+        display: flex;
+        flex-direction: column;
+        row-gap: 14px;
+    }
+
+    &__room-input {
+        @extend .filter__checkbox-input;
+    }
+
+    &__room-label {
+        @extend .filter__checkbox-label;
+        padding-left: 30px;
+        color: $main-color;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 121%;
+        text-align: left;
+    }
+
+    &__room-label::before {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        left: 0;
+        border: 1px solid rgb(136, 136, 136);
+    }
+
+    &__room-input:checked+.filter__room-label::after {
+        content: '';
+        background: url(images/mark.svg) no-repeat center;
+        border: none;
+        background-size: contain;
+        width: 10px;
+        height: 10px;
+        left: 3px;
+        top: 1px;
+        position: absolute;
+    }
+
+}
